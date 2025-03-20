@@ -1,0 +1,39 @@
+name: Weather Prediction Service
+
+on:
+  push:
+    branches:
+      - master  # Trigger on push to the master branch
+  schedule:
+    - cron: '0 */4 * * *'  # Run every 4 hours
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'  # Use Python 3.9
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Run the prediction service
+      - name: Run Weather Prediction Service
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          API_KEY: ${{ secrets.API_KEY }}
+          LOCATION: ${{ secrets.LOCATION }}
+        run: |
+          python prediction_service.py
