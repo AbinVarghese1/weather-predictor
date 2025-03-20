@@ -312,10 +312,10 @@ class WeatherPredictor:
 
 def main():
     # Configuration
-    SUPABASE_URL = 'https://njsbtpgqjlqdmdzxsvtq.supabase.co'
-    SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qc2J0cGdxamxxZG1kenhzdnRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzYyNjIzOTAsImV4cCI6MjA1MTgzODM5MH0.gIIcck08703Ftew6czPOAoTyWweGmGpXRUInSRR4_Y0'
-    API_KEY = "ZLWZ6DA5HUCRD3G5J9WPR4BTF"
-    LOCATION = "choondacherry"
+    SUPABASE_URL = os.getenv('SUPABASE_URL')
+    SUPABASE_KEY = os.getenv('SUPABASE_KEY')
+    API_KEY = os.getenv('API_KEY')
+    LOCATION = os.getenv('LOCATION')
     
     try:
         predictor = WeatherPredictor(SUPABASE_URL, SUPABASE_KEY, API_KEY, LOCATION)
